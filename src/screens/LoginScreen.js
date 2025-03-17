@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import api from "../axios/axios";
 
-export default function Login({navigation}) {
+export default function Login({ navigation }) {
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -28,6 +28,7 @@ export default function Login({navigation}) {
       }
     );
   }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Faça Login</Text>
@@ -74,11 +75,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   button: {
-    backgroundColor: "#fff",
+    backgroundColor: "#F44336", // Cor vermelha para o botão
     padding: 10,
     borderRadius: 5,
     alignItems: "center",
-    width: "100%",
+    width: "100%", // Ocupando 100% da largura disponível
+    marginVertical: 10, // Para espaçamento entre os botões
+  },
+  buttonText: {
+    color: "white", // Cor do texto dentro do botão
+    fontWeight: "bold",
   },
   title: {
     fontSize: 25,

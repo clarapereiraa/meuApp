@@ -4,27 +4,22 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Home</Text>
+      <Text style={styles.title}>Bem-vindo</Text>
 
+      {/* Botão para Login */}
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("CadastroEvento")}
+        onPress={() => navigation.navigate("Login")} // Navegar para a tela de Login
       >
-        <Text style={styles.buttonText}>Cadastro de Evento</Text>
+        <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
 
+      {/* Botão para Cadastro */}
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("CadastroOrganizador")}
+        onPress={() => navigation.navigate("Cadastro")} // Navegar para a tela de Cadastro
       >
-        <Text style={styles.buttonText}>Cadastro de Organizador</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("CadastroIngresso")}
-      >
-        <Text style={styles.buttonText}>Cadastro de Ingresso</Text>
+        <Text style={styles.buttonText}>Cadastrar</Text>
       </TouchableOpacity>
     </View>
   );
@@ -35,25 +30,25 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white",
     padding: 20,
+    backgroundColor: "white", // Cor do fundo
   },
   title: {
-    fontSize: 25,
+    fontSize: 30,
     fontWeight: "bold",
-    marginBottom: 30,
+    marginBottom: 50, // Espaço entre o título e os botões
   },
   button: {
-    backgroundColor: "#4CAF50",
-    padding: 10,
+    backgroundColor: "#F44336", // Cor vermelha para os botões
+    padding: 15,
     borderRadius: 5,
     alignItems: "center",
-    width: "80%",
-    marginVertical: 10,
+    width: "80%", // Tamanho do botão
+    marginVertical: 10, // Espaçamento entre os botões
   },
   buttonText: {
-    color: "white",
+    color: "white", // Cor do texto no botão
+    fontSize: 18,
     fontWeight: "bold",
-    fontSize: 16,
   },
 });

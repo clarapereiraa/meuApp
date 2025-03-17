@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Alert,
   StyleSheet,
-  Button,
 } from "react-native";
 import api from "../axios/axios";
 
@@ -31,6 +30,7 @@ export default function Cadastro({ navigation }) {
       }
     );
   }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Faça Cadastro</Text>
@@ -75,10 +75,10 @@ export default function Cadastro({ navigation }) {
         style={styles.input}
       />
       <TouchableOpacity onPress={handleCadastro} style={styles.button}>
-        <Text style={styles.button}>Cadastrar-se</Text>
+        <Text style={styles.buttonText}>Cadastrar-se</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate("Login")} style={styles.button}>
-        <Text style={styles.button}>Login</Text>
+        <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
     </View>
   );
@@ -100,10 +100,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   button: {
-    backgroundColor: "black",
-    color: "white",
+    backgroundColor: "#F44336", // Cor vermelha para o botão
+    padding: 10,
     borderRadius: 5,
-    margin: 10,
+    alignItems: "center",
+    width: "100%", // Ocupando 100% da largura disponível
+    marginVertical: 10, // Para espaçamento entre os botões
+  },
+  buttonText: {
+    color: "white", // Cor do texto dentro do botão
+    fontWeight: "bold",
   },
   title: {
     fontSize: 25,
