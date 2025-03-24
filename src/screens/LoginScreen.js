@@ -10,8 +10,10 @@ import {
 } from "react-native";
 import api from "../axios/axios";
 import {Ionicons} from "@expo/vector-icons"
+import { useNavigation } from "@react-navigation/native";
 
-export default function Login({ navigation }) {
+export default function Login() {
+  const navigation = useNavigation();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   button: {
-    backgroundColor: "#F44336",
+    backgroundColor: "blue",
     padding: 10,
     borderRadius: 5,
     alignItems: "center",

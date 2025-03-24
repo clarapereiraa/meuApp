@@ -8,8 +8,10 @@ import {
   StyleSheet,
 } from "react-native";
 import api from "../axios/axios";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Cadastro({ navigation }) {
+export default function Cadastro() {
+   const navigation = useNavigation();
   const [user, setUser] = useState({
     name: "",
     cpf: "",
@@ -100,15 +102,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   button: {
-    backgroundColor: "#F44336", // Cor vermelha para o botão
+    backgroundColor: "blue", 
     padding: 10,
     borderRadius: 5,
     alignItems: "center",
-    width: "100%", // Ocupando 100% da largura disponível
-    marginVertical: 10, // Para espaçamento entre os botões
+    width: "100%", 
+    marginVertical: 10,
   },
   buttonText: {
-    color: "white", // Cor do texto dentro do botão
+    color: "white", 
     fontWeight: "bold",
   },
   title: {
