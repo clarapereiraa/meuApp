@@ -9,11 +9,13 @@ import {
   Button,
 } from "react-native";
 import api from "../axios/axios";
+import {Ionicons} from "@expo/vector-icons"
 
 export default function Login({ navigation }) {
   const [user, setUser] = useState({
     email: "",
     password: "",
+    showPassword: false
   });
 
   async function handleLogin() {
@@ -40,14 +42,21 @@ export default function Login({ navigation }) {
         }}
         style={styles.input}
       />
+      <View style={styles.passwordContainer}>
       <TextInput
+      style={styles.passwordInput}
         placeholder="Senha"
         value={user.password}
+        secureTextEntry={user.showPassword}
         onChangeText={(value) => {
           setUser({ ...user, password: value });
         }}
-        style={styles.input}
+        
       />
+      <TouchableOpacity onPress={()=> setUser({...user,showPassword: !user.showPassword})}>
+        <Ionicons name={user.showPassword?"eye-off":"eye"} size={24} color="gray" />
+      </TouchableOpacity>
+      </View>
       <TouchableOpacity onPress={handleLogin} style={styles.button}>
         <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
@@ -75,15 +84,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   button: {
-    backgroundColor: "#F44336", // Cor vermelha para o botão
+    backgroundColor: "#F44336",
     padding: 10,
     borderRadius: 5,
     alignItems: "center",
-    width: "100%", // Ocupando 100% da largura disponível
-    marginVertical: 10, // Para espaçamento entre os botões
+    width: "100%", 
+    marginVertical: 10,
   },
   buttonText: {
-    color: "white", // Cor do texto dentro do botão
+    color: "white", 
     fontWeight: "bold",
   },
   title: {
@@ -91,4 +100,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 20,
   },
+  passwordContainer:{
+    flexDirection:"row",
+    alignItems: "center",
+    width:"100",
+    borderBottomWidth:1,
+    paddingRight:10,
+  },
+  passwordInput:{
+    flex:1,
+    height:40,
+  }
 });
