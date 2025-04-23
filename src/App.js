@@ -29,6 +29,13 @@ export default function App() {
             </Layout>
           )}
         />
+        <Stack.Screen name="EventosScreen">
+          {() => (
+            <Layout>
+              <EventosScreen/>
+            </Layout>
+          )}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
