@@ -61,7 +61,7 @@ export default function EventoScreens({ navigation }) {
             >
               <Text>{item.nome}</Text>
               <Text>{item.local}</Text>
-              <Text>{new Date(item.data_hora).toLocaleString}</Text>
+              <Text>{new Date(item.data_hora).toLocaleString()}</Text>
             </TouchableOpacity>
           )}
         />
