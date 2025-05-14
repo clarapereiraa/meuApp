@@ -9,8 +9,9 @@ import {
   Button,
 } from "react-native";
 import api from "../axios/axios";
+import DateTimePicker from "../components/DateTimePicker";
 
-export default function CadastroEvento({ navigation }) {
+export default function CadastroEvento() {
   const [evento, setEvento] = useState({
     nome: "",
     descricao: "",
@@ -34,6 +35,7 @@ export default function CadastroEvento({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Cadastrar Evento</Text>
+      
       <TextInput
         placeholder="Nome do Evento"
         value={evento.nome}
@@ -46,13 +48,15 @@ export default function CadastroEvento({ navigation }) {
         onChangeText={(value) => setEvento({ ...evento, descricao: value })}
         style={styles.input}
       />
-       <TextInput
-        placeholder="Data e Hora"
-        value={evento.data_hora}
-        onChangeText={(value) => {
-          setEvento({ ...evento, data_hora: value });
-        }}
-        style={styles.input}
+      <DateTimePicker
+        type={"datetime"}
+        buttonTitle={
+          evento.data_hora === ""
+            ? "Selecione a data do evento"
+            : evento.data_hora.toLocaleString()
+        }
+        setValue={setEvento}
+        dateKey={"data_hora"}
       />
       <TextInput
         placeholder="Local"
@@ -63,48 +67,49 @@ export default function CadastroEvento({ navigation }) {
       <TextInput
         placeholder="ID do Organizador"
         value={evento.fk_id_organizador}
-        onChangeText={(value) => setEvento({ ...evento, fk_id_organizador: value })}
+        onChangeText={(value) =>
+          setEvento({ ...evento, fk_id_organizador: value })
+        }
         style={styles.input}
         keyboardType="numeric"
       />
       <TouchableOpacity onPress={handleevento} style={styles.button}>
         <Text style={styles.buttonText}>Cadastrar Evento</Text>
       </TouchableOpacity>
-
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: "white",
-      padding: 20,
-    },
-    input: {
-      width: 200,
-      height: 40,
-      borderWidth: 1,
-      borderRadius: 5,
-      paddingHorizontal: 10,
-      marginBottom: 15,
-    },
-    button: {
-      backgroundColor: "#492CFF",
-      padding: 10,
-      borderRadius: 5,
-      alignItems: "center",
-      width: "80%",
-    },
-    buttonText: {
-      color: "white",
-      fontWeight: "bold",
-    },
-    title: {
-      fontSize: 25,
-      fontWeight: "bold",
-      marginBottom: 20,
-    },
-  });
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
+    padding: 20,
+  },
+  input: {
+    width: 200,
+    height: 40,
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    marginBottom: 15,
+  },
+  button: {
+    backgroundColor: "#492CFF",
+    padding: 10,
+    borderRadius: 5,
+    alignItems: "center",
+    width: "80%",
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "bold",
+  },
+  title: {
+    fontSize: 25,
+    fontWeight: "bold",
+    marginBottom: 20,
+  },
+});

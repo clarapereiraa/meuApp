@@ -9,9 +9,10 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from "react-native";
+import * as SecureStore from "expo-secure-store";
+import { useNavigation } from "@react-navigation/native";
 
-
-export default function EventoScreens({ navigation }) {
+export default function EventoScreens() {
   const [eventos, setEventos] = useState([]);
   const [ingressos, setIngressos] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -20,7 +21,7 @@ export default function EventoScreens({ navigation }) {
 
   useEffect(() => {
     getEventos();
-  },[]);
+  }, []);
 
   async function getEventos() {
     try {
@@ -36,16 +37,23 @@ export default function EventoScreens({ navigation }) {
   async function abrirModalComIngressos(evento) {
     setEventoSelecionado(evento);
     setModalVisible(true);
-    try{
+    try {
       const response = await api.getIngressosPorEvento(evento.id_evento);
       setIngressos(response.data.ingressos);
-    }catch (error){
+    } catch (error) {
       console.log("Erro ao buscar ingressos", error.response);
     }
   }
-
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("CadastroEventoScreen");
+        }}
+      >
+        <Text>Criar evento</Text>
+      </TouchableOpacity>
       <Text style={styles.title}>Eventos Disponiveis</Text>
 
       {loading ? (
@@ -79,16 +87,18 @@ export default function EventoScreens({ navigation }) {
             <FlatList
               data={ingressos}
               keyExtractor={(item) => item.id_ingresso.toString()}
-              renderItem={({ item }) =>( 
-              <View style={styles.ingressoItem}> 
-                <Text>Tipo: {item.tipo}</Text>
-                <Text>Preço: R$ {item.preco}</Text>
-              </View>
-          )}
+              renderItem={({ item }) => (
+                <View style={styles.ingressoItem}>
+                  <Text>Tipo: {item.tipo}</Text>
+                  <Text>Preço: R$ {item.preco}</Text>
+                </View>
+              )}
             />
           )}
-          <TouchableOpacity style={styles.closeButton}
-          onPress={()=> setModalVisible(false)}>
+          <TouchableOpacity
+            style={styles.closeButton}
+            onPress={() => setModalVisible(false)}
+          >
             <Text style={{ color: "white" }}>Fechar</Text>
           </TouchableOpacity>
         </View>

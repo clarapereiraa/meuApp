@@ -9,30 +9,27 @@ import {
   Button,
 } from "react-native";
 import api from "../axios/axios";
-import {Ionicons} from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import * as SecureStore from 'expo-secure-store';
+import * as SecureStore from "expo-secure-store";
 
 export default function Login() {
   const navigation = useNavigation();
   const [user, setUser] = useState({
     email: "",
     password: "",
-    showPassword: false
+    showPassword: false,
   });
 
-  async function saveToken(token){
+  async function saveToken(token) {
     await SecureStore.setItemAsync("token", token);
-    console.log(token);
   }
-
-
 
   async function handleLogin() {
     await api.postLogin(user).then(
       (response) => {
         Alert.alert("OK", response.data.message);
-        saveToken(response.data.token)
+        saveToken(response.data.token);
         navigation.navigate("EventosScreen");
       },
       (error) => {
@@ -54,19 +51,24 @@ export default function Login() {
         style={styles.input}
       />
       <View style={styles.passwordContainer}>
-      <TextInput
-      style={styles.passwordInput}
-        placeholder="Senha"
-        value={user.password}
-        secureTextEntry={user.showPassword}
-        onChangeText={(value) => {
-          setUser({ ...user, password: value });
-        }}
-        
-      />
-      <TouchableOpacity onPress={()=> setUser({...user,showPassword: !user.showPassword})}>
-        <Ionicons name={user.showPassword?"eye-off":"eye"} size={24} color="gray" />
-      </TouchableOpacity>
+        <TextInput
+          style={styles.passwordInput}
+          placeholder="Senha"
+          value={user.password}
+          secureTextEntry={user.showPassword}
+          onChangeText={(value) => {
+            setUser({ ...user, password: value });
+          }}
+        />
+        <TouchableOpacity
+          onPress={() => setUser({ ...user, showPassword: !user.showPassword })}
+        >
+          <Ionicons
+            name={user.showPassword ? "eye-off" : "eye"}
+            size={24}
+            color="gray"
+          />
+        </TouchableOpacity>
       </View>
       <TouchableOpacity onPress={handleLogin} style={styles.button}>
         <Text style={styles.buttonText}>Entrar</Text>
@@ -99,11 +101,11 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     alignItems: "center",
-    width: "100%", 
+    width: "100%",
     marginVertical: 10,
   },
   buttonText: {
-    color: "white", 
+    color: "white",
     fontWeight: "bold",
   },
   title: {
@@ -111,15 +113,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 20,
   },
-  passwordContainer:{
-    flexDirection:"row",
+  passwordContainer: {
+    flexDirection: "row",
     alignItems: "center",
-    width:"100",
-    borderBottomWidth:1,
-    paddingRight:10,
+    width: "100",
+    borderBottomWidth: 1,
+    paddingRight: 10,
   },
-  passwordInput:{
-    flex:1,
-    height:40,
-  }
-})
+  passwordInput: {
+    flex: 1,
+    height: 40,
+  },
+});

@@ -5,6 +5,7 @@ import LoginScreen from "./screens/LoginScreen";
 import CadastroScreen from "./screens/CadastroScreen";
 import Layout from "./components/Layout";
 import EventosScreen from "./screens/EventosScreen";
+import CadastroEventoScreen from "./screens/CadastroEventoScreen";
 
 
 const Stack = createStackNavigator();
@@ -35,6 +36,15 @@ export default function App() {
               <EventosScreen/>
             </Layout>
           )}
+          
+        </Stack.Screen>
+        <Stack.Screen name="CadastroEventoScreen">
+          {() => (
+            <Layout>
+              <CadastroEventoScreen/>
+            </Layout>
+          )}
+          
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
